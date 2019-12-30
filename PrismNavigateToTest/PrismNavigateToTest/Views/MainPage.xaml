@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PrismNavigateToTest.Views.MainPage"
+             Title="{Binding Title}"
+
+             xmlns:prism="clr-namespace:Prism.Navigation.Xaml;assembly=Prism.Forms"
+             xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
+             xmlns:model="clr-namespace:PrismNavigateToTest.Model"
+             >
+
+    <ListView Margin="0,20,0,0">
+        <ListView.Behaviors>
+            <b:EventToCommandBehavior 
+                            EventName="ItemSelected"
+                            Command="{prism:NavigateTo 'ProductView'}"
+                            EventArgsParameterPath="SelectedItem"
+                            />
+        </ListView.Behaviors>
+
+        <ListView.ItemsSource>
+            <x:Array Type="{x:Type model:Product}">
+                <model:Product name="car"/>
+                <model:Product name="plane"/>
+            </x:Array>
+        </ListView.ItemsSource>
+
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    <Grid>
+                        <Label Text="{Binding name}" FontAttributes="Bold" />
+                    </Grid>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
+    
+
+</ContentPage>
